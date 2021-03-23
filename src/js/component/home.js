@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 export function Home() {
-	//FUNCIONALIDAD ENTERA
-	//Fetching the array and storing it
+
 	const [playlist, setPlaylist] = useState([]);
 	useEffect(() => {
 		songList();
@@ -14,16 +13,15 @@ export function Home() {
 			.then(data => setPlaylist(data));
 	};
 
-	//Index state
+
 	const [currentSong, setCurrentSong] = useState(0);
 
-	//Button state
+
 	const [playBtn, setBtn] = useState("play");
 
-	//UseRef to call on <audio/> from MusicPlayer
 	const audio = useRef();
 
-	// Song functionality
+
 	async function playSong() {
 		audio.current.pause();
 
@@ -32,7 +30,7 @@ export function Home() {
 		await audio.current.play();
 		const newId = currentSong.id + 1;
 
-		//.ended boolean tira false mientras da play, tira true cuando termina
+
 		(await audio.current.ended) == true
 			? setCurrentSong(playlist[newId])
 			: "";
@@ -40,7 +38,7 @@ export function Home() {
 		setBtn("pause");
 	}
 
-	//Button functionality
+
 
 	function toggleBtn() {
 		playBtn == "play" ? setBtn("pause") : setBtn("play");
@@ -49,7 +47,7 @@ export function Home() {
 
 	return (
 		<>
-			{/* Lista de canciones */}
+			{/* Songlist */}
 			<div id="MusicPlayer">
 				<table className="table table-hover table-dark text-white-50">
 					<thead>
@@ -86,7 +84,7 @@ export function Home() {
 				</table>
 			</div>
 
-			{/* Barra de botones */}
+			{/* Botones */}
 			<div id="PlayBar">
 				<div className="playBar d-flex justify-content-center">
 					<div className="row p-1 align-items-center">
